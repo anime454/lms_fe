@@ -1,0 +1,217 @@
+POST http://localhost:1323/customer/new HTTP/1.1
+content-type: application/json
+
+{
+    "title_id": "550e8422-e29b-41d4-b111-446655440000",
+    "th_name": "สมชาย",
+    "en_name": "Somchai",
+    "th_lastname": "ใจดี",
+    "en_lastname": "Jaidee",
+    "ic_card": "1234567890123",
+    "passport_no": "A1234567",
+    "address": {
+        "contact_name": "สมหญิง ใจดี",
+        "building_no": "123",
+        "building_name": "Siam Condo",
+        "floor": "5",
+        "room_no": "501",
+        "village_no": "หมู่ 5",
+        "alley": "ซอยสุขุมวิท 55",
+        "street": "ถนนสุขุมวิท",
+        "sub_district": "คลองตันเหนือ",
+        "district": "วัฒนา",
+        "province": "กรุงเทพมหานคร",
+        "postal_code": "10110",
+        "home_phone": "021234567"
+    },
+    "mobile_no": "0812345678",
+    "email": "somchai.jaidee@example.com",
+    "education_id": "550e8400-e29b-41d4-a716-446655440000",
+    "employment_id": "61ad200-e29a-21d2-a715-333322110000",
+    "salary": 50000.50,
+    "other_income": 2000.75
+}
+
+###
+
+POST http://localhost:1323/customer/edit HTTP/1.1
+content-type: application/json
+
+{
+    "cid": "a9e8ddd6-5c00-4917-86ad-ce1213073693",
+    "title_id": "550e8422-e29b-41d4-b111-446655440000",
+    "th_name": "สมชาย",
+    "en_name": "Somchai",
+    "th_lastname": "ไม่ใจดี",
+    "en_lastname": "Jaidee",
+    "ic_card": "1234567890123",
+    "passport_no": "A1234567",
+    "address": {
+        "contact_name": "-",
+        "building_no": "123",
+        "building_name": "Siam Condo 2",
+        "floor": "5",
+        "room_no": "501",
+        "village_no": "หมู่ 5",
+        "alley": "ซอยสุขุมวิท 55",
+        "street": "ถนนสุขุมวิท",
+        "sub_district": "คลองตันเหนือ",
+        "district": "วัฒนา",
+        "province": "กรุงเทพมหานคร",
+        "postal_code": "10110",
+        "home_phone": "021234567"
+    },
+    "mobile_no": "0812345678",
+    "email": "somchai.jaidee@example.com",
+    "education_id": "550e8400-e29b-41d4-a716-446655440000",
+    "employment_id": "61ad200-e29a-21d2-a715-333322110000",
+    "salary": 50000.50,
+    "other_income": 2000.75
+}
+###
+
+POST http://localhost:1323/customer/view HTTP/1.1
+content-type: application/json
+
+{
+    "cid": "c697ffbc-d330-4850-9c4b-695420f4273d"
+}
+###
+
+
+POST http://localhost:1323/customer/remove HTTP/1.1
+content-type: application/json
+
+{
+    "cid": "189085b0-093b-4556-8152-81cc143debe5"
+}
+###
+
+GET http://localhost:1323/education/ HTTP/1.1
+###
+
+
+GET http://localhost:1323/employment/ HTTP/1.1
+###
+
+GET http://localhost:1323/customer-title/ HTTP/1.1
+###
+
+
+POST http://localhost:1323/customer/get-all HTTP/1.1
+content-type: application/json
+
+{
+    "limit": 5,
+    "offset": 10
+}
+###
+
+
+POST http://localhost:1323/loan/ HTTP/1.1
+content-Type: application/json
+
+{
+    "name": "Home Loan",
+    "description": "A loan for purchasing residential property.",
+    "criteria": [
+        {
+            "risk_profile": "High",
+            "nature_ofAssets": "Secured",
+            "minimum_value_of_assets": 50000.75,
+            "credit_score": 700
+        },
+        {
+            "risk_profile": "Medium",
+            "nature_ofAssets": "Unsecured",
+            "minimum_value_of_assets": 25000.50,
+            "credit_score": 650
+        }
+    ],
+    "characteristics": {
+        "type": "Secured",
+            "amortization_period": {
+            "duration": 15,
+            "type": "Years"
+        },
+            "interest_rate": {
+            "type": "Fixed",
+            "value": 5
+        },
+        "max_value": 1000000
+    }
+}
+
+###
+
+POST http://localhost:1323/loan/dashboard HTTP/1.1
+content-Type: application/json
+
+{
+    "limit": 50, 
+    "offset": 5
+}
+
+###
+
+PUT http://localhost:1323/loan/ HTTP/1.1
+content-Type: application/json
+
+{
+    "lid": "1ec4c767-ff59-49a4-9a06-36865b8d1c79",
+    "name": "Home Loan 2",
+    "description": "A loan for purchasing residential property.",
+    "criteria": [
+        {
+            "risk_profile": "High",
+            "nature_ofAssets": "Secured",
+            "minimum_value_of_assets": 50000.75,
+            "credit_score": 700
+        },
+        {
+            "risk_profile": "Medium",
+            "nature_ofAssets": "Unsecured",
+            "minimum_value_of_assets": 25000.50,
+            "credit_score": 650
+        }
+    ],
+    "characteristics": {
+        "type": "Secured",
+            "amortization_period": {
+            "duration": 15,
+            "type": "Years"
+        },
+        "interest_rate": {
+            "type": "Fixed",
+            "value": 5111
+        },
+        "max_value": 2000000
+    }
+}
+
+###
+
+GET http://localhost:1323/loan/1ec4c767-ff59-49a4-9a06-36865b8d1c79 HTTP/1.1
+
+
+###
+
+
+DELETE http://localhost:1323/loan/1ec4c767-ff59-49a4-9a06-36865b8d1c79 HTTP/1.1
+
+###
+
+POST http://localhost:1323/payment/ HTTP/1.1
+content-Type: application/json
+
+{
+    "cid": "12345",
+    "lid": "67890",
+    "due_date": "31/12/2024 12:00:00.000",
+    "amount": 500000,
+    "status": "active",
+    "interest_rate": 5
+}
+
+### 
+GET http://localhost:1323/payment/dashboard?limit=5&offset=0 HTTP/1.1
