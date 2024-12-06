@@ -5,7 +5,7 @@ interface paymentResp{
     code: number;
     message: string;
     data: {
-        lid: string;
+        pid: string;
     };
 }
 
@@ -146,7 +146,7 @@ export const UpdatePayment = async (data: PaymentData):Promise<paymentResp> => {
     }
 
     try {
-        const resp = await axios.post<paymentResp>("/payment/", payload );
+        const resp = await axios.put<paymentResp>("/payment/", payload );
         if (resp.status === 200) {
             return Promise.resolve(resp.data);
         } else {

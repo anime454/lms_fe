@@ -13,16 +13,16 @@ type LoanData struct {
 }
 
 type LoanRepo struct {
-	Lid                    string `gorm:"lid"`
-	Name                   string `gorm:"name"`
-	Description            string `gorm:"description"`
-	Criteria               string `gorm:"criteria"`
-	CharacteristicType     string `gorm:"characteristic_type"`
-	AmortizationDuration   int64  `gorm:"amortization_duration"`
-	AmortizationPeriodType string `gorm:"amortization_period_type"`
-	InterestRateType       string `gorm:"interest_rate_type"`
-	InterestRateValue      int64  `gorm:"interest_rate_value"`
-	MaximumLoanAmount      int64  `gorm:"maximum_loan_amount"`
+	Lid                    string  `gorm:"lid"`
+	Name                   string  `gorm:"name"`
+	Description            string  `gorm:"description"`
+	Criteria               string  `gorm:"criteria"`
+	CharacteristicType     string  `gorm:"characteristic_type"`
+	AmortizationDuration   int64   `gorm:"amortization_duration"`
+	AmortizationPeriodType string  `gorm:"amortization_period_type"`
+	InterestRateType       string  `gorm:"interest_rate_type"`
+	InterestRateValue      float64 `gorm:"interest_rate_value"`
+	MaximumLoanAmount      int64   `gorm:"maximum_loan_amount"`
 }
 
 func (l LoanRepo) TableName(namer schema.Namer) string {
@@ -69,8 +69,8 @@ type AmortizationPeriod struct {
 }
 
 type InterestRate struct {
-	Type  string `json:"type"`
-	Value int64  `json:"value"`
+	Type  string  `json:"type"`
+	Value float64 `json:"value"`
 }
 
 type NewLoanReq struct {

@@ -136,7 +136,7 @@ export const NewLoan = async (req: LoanData):Promise<newLoanResp> => {
         characteristics: {
             type: req.characteristics.securedOrUnsecured,
             amortization_period: {
-                duration: req.characteristics.amortizationPeriod.duration,
+                duration: Number(req.characteristics.amortizationPeriod.duration),
                 type: req.characteristics.amortizationPeriod.type
             },
             interest_rate: {
@@ -179,7 +179,7 @@ export const UpdateLoan = async (req: LoanData):Promise<newLoanResp> => {
         characteristics: {
             type: req.characteristics.securedOrUnsecured,
             amortization_period: {
-                duration: req.characteristics.amortizationPeriod.duration,
+                duration: Number(req.characteristics.amortizationPeriod.duration),
                 type: req.characteristics.amortizationPeriod.type
             },
             interest_rate: {

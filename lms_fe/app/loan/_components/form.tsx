@@ -306,7 +306,7 @@ const LoanForm: React.FC<LoanFormProps> = ({ defaultValues, onSubmit }) => {
 
                 <Box textAlign="right" paddingTop={4}>
                     <Button type="submit" variant="contained" color="primary">
-                        Create Loan
+                            Submit
                     </Button>
                 </Box>
             </form>

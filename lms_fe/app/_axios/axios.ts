@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 axios.interceptors.request.use(
   (request) => {
     request.baseURL = `/api/v1`;
+    // request.baseURL = `http://localhost:1323/api/v1`;
     request.headers["Accept"] = `application/json`;
     request.validateStatus = () => true;
     return Promise.resolve(request);

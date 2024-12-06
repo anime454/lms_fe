@@ -24,8 +24,8 @@ const EditPaymentPage = () => {
     
     const handleEditSubmit = async(data: PaymentData) => {
         const resp = await UpdatePayment(data)
-        if (resp.data.lid) {
-            router.push(`/loan/${resp.data.lid}`)
+        if (resp.data.pid) {
+            router.push(`/payment/${resp.data.pid}`)
         }
     };
     

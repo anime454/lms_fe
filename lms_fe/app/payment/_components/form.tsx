@@ -194,7 +194,7 @@ const PaymentFormComponent: React.FC<ContractFormProps> = ({ defaultValues, onSu
 
                 <Box textAlign="right" paddingTop={4}>
                     <Button type="submit" variant="contained" color="primary" >
-                        Create Payment
+                        Submit
                     </Button>
                 </Box>
             </form>
