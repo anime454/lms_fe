@@ -1,0 +1,92 @@
+networks:
+  kong-net:
+    driver: bridge
+
+services:
+  kong-database:
+    image: postgres:13
+    container_name: kong-database
+    networks:
+      - kong-net
+    ports:
+      - "5555:5432"
+    command: -p 5432
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_DB: kong
+      POSTGRES_PASSWORD: kongpass
+    restart: always
+
+  kong-migrations:
+    image: kong
+    container_name: kong-migrations
+    networks:
+      - kong-net
+    depends_on:
+      - kong-database
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kongpass
+    command: ["kong", "migrations", "bootstrap"]
+    restart: "no"
+
+  kong-gateway:
+    image: kong
+    container_name: kong-gateway
+    networks:
+      - kong-net
+    depends_on:
+      - kong-database
+      - kong-migrations
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kongpass
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+      KONG_ADMIN_GUI_URL: http://localhost:8002
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:8002:8002"
+      - "127.0.0.1:8444:8444"
+    restart: always
+
+  frontend:
+      build:
+        context: ./lms_fe
+        dockerfile: Dockerfile
+      networks:
+        - kong-net
+      restart: unless-stopped
+
+  backend:
+    build:
+      context: ./lms_be
+      dockerfile: Dockerfile
+    networks:
+      - kong-net
+    restart: unless-stopped
+
+  db:
+    image: postgres:14
+    container_name: postgres_db
+    networks:
+      - kong-net
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: lms_db
+      POSTGRES_USER: lms_admin
+      POSTGRES_PASSWORD: lms_password
+
+volumes:
+  pgdata:
